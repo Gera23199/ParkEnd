@@ -1,0 +1,50 @@
+services:
+
+  parkend_mysql_principal:
+    image: mysql:8.0
+    container_name: parkend_mysql_principal
+    restart: always
+
+    environment:
+      MYSQL_DATABASE: parkend
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: parkend_user
+      MYSQL_PASSWORD: parkend_pass
+
+    ports:
+      - "3310:3306"
+
+    volumes:
+      - parkend_mysql_principal_data:/var/lib/mysql
+
+    networks:
+      - parkend_net
+
+
+  parkend_mysql_respaldo:
+    image: mysql:8.0
+    container_name: parkend_mysql_respaldo
+    restart: always
+
+    environment:
+      MYSQL_DATABASE: parkend
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: parkend_user
+      MYSQL_PASSWORD: parkend_pass
+
+    ports:
+      - "3311:3306"
+
+    volumes:
+      - parkend_mysql_respaldo_data:/var/lib/mysql
+
+    networks:
+      - parkend_net
+
+
+networks:
+  parkend_net:
+
+volumes:
+  parkend_mysql_principal_data:
+  parkend_mysql_respaldo_data:
